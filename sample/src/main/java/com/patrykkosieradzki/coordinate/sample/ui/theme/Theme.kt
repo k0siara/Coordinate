@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.coordinate.ui.theme
+package com.patrykkosieradzki.coordinate.sample.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

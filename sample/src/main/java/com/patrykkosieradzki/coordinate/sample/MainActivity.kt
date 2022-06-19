@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.coordinate
+package com.patrykkosieradzki.coordinate.sample
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.patrykkosieradzki.coordinate.ui.theme.CoordinateTheme
+import com.patrykkosieradzki.coordinate.sample.ui.theme.CoordinateTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
