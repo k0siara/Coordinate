@@ -6,12 +6,12 @@ import com.patrykkosieradzki.coordinate.internal.launchInLifecycle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 
-interface CoordinatorEventBroadcaster<Event : Any> {
-    val coordinatorEvents: Flow<Event>
-    fun emitCoordinatorEvent(event: Event)
+interface CoordinatorEventBroadcaster<EVENT : Any> {
+    val coordinatorEvents: Flow<EVENT>
+    fun emitCoordinatorEvent(event: EVENT)
 
     companion object {
-        fun <Event : Any> delegate(): CoordinatorEventBroadcaster<Event> {
+        fun <EVENT : Any> delegate(): CoordinatorEventBroadcaster<EVENT> {
             return CoordinatorEventBroadcasterImpl()
         }
     }
