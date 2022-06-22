@@ -1,7 +1,7 @@
 package com.patrykkosieradzki.coordinate.sample.ui
 
-import com.patrykkosieradzki.coordinate.AbstractCoroutineCoordinator
-import com.patrykkosieradzki.coordinate.Coordinator
+import com.patrykkosieradzki.coordinate.core.AbstractCoroutineCoordinator
+import com.patrykkosieradzki.coordinate.core.Coordinator
 import com.patrykkosieradzki.coordinate.sample.ui.TestCoordinator.Screen
 
 class TestCoordinator(

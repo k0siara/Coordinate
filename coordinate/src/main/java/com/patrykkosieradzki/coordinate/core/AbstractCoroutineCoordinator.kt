@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.coordinate
+package com.patrykkosieradzki.coordinate.core
 
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope

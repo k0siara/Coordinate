@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.patrykkosieradzki.coordinate.CoordinatorHost
+import com.patrykkosieradzki.coordinate.core.CoordinatorHost
 
 @MainThread
 inline fun <reified VM : ViewModel> Fragment.coordinatorViewModels(): Lazy<VM> {
