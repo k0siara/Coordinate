@@ -2,9 +2,33 @@ package com.patrykkosieradzki.coordinate.sample.ui
 
 import com.patrykkosieradzki.coordinate.AbstractCoroutineCoordinator
 import com.patrykkosieradzki.coordinate.Coordinator
+import com.patrykkosieradzki.coordinate.sample.ui.TestCoordinator.Screen
 
-class TestCoordinator : AbstractCoroutineCoordinator<Int>() {
+class TestCoordinator(
+    testNavigator: TestNavigator
+) : AbstractCoroutineCoordinator<Screen, Int>(navigator = testNavigator) {
 
-    override val childCoordinator: Coordinator?
-        get() = super.childCoordinator
+    sealed class Screen {
+        object A : Screen()
+        object B : Screen()
+    }
+
+    override fun onEvent(event: Any) {
+        finishWith(123)
+    }
+}
+
+class TestNavigator : Coordinator.Navigator<Screen> {
+
+    override fun canNavigate(): Boolean {
+        return true
+    }
+
+    override fun navigateTo(screen: Screen) {
+        TODO("Not yet implemented")
+    }
+
+    override fun goBack() {
+        TODO("Not yet implemented")
+    }
 }

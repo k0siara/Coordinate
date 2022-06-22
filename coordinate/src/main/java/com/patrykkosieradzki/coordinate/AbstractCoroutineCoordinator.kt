@@ -11,9 +11,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 
-abstract class AbstractCoroutineCoordinator<RESULT>(
+abstract class AbstractCoroutineCoordinator<SCREEN, RESULT>(
+    navigator: Coordinator.Navigator<SCREEN>,
     coroutineContext: CoroutineContext = Dispatchers.Main.immediate + SupervisorJob()
-) : AbstractCoordinator(), CoroutineCoordinator<RESULT> {
+) : AbstractCoordinator<SCREEN>(navigator = navigator), CoroutineCoordinator<RESULT> {
 
     override val coroutineScope = CoroutineScope(coroutineContext)
 
