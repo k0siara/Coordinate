@@ -16,9 +16,27 @@ ext {
 
 //apply from: "${rootDir}/scripts/publish-module.gradle"
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+android {
+    compileSdkVersion Configuration.compileSdk
+    defaultConfig {
+        minSdkVersion Configuration.minSdk
+        targetSdkVersion Configuration.targetSdk
+        versionCode Configuration.versionCode
+        versionName Configuration.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -29,4 +47,4 @@ dependencies {
     testImplementation Dependencies.junit
 }
 
-//apply from: "$rootDir/spotless/spotless.gradle"
+apply from: "$rootDir/spotless/spotless.gradle"
