@@ -5,27 +5,37 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
+import com.patrykkosieradzki.coordinate.core.Coordinator
 import com.patrykkosieradzki.coordinate.core.CoordinatorHost
 
 @MainThread
-inline fun <reified VM : ViewModel> Fragment.coordinatorViewModels(): Lazy<VM> {
+inline fun <reified VM : ViewModel> Fragment.coordinatorViewModels(
+    noinline ownerProducer: () -> ViewModelStoreOwner = { this },
+    noinline coordinatorProducer: () -> Coordinator = defaultCoordinatorProducer
+): Lazy<VM> {
     return createViewModelLazy(
         viewModelClass = VM::class,
-        storeProducer = { viewModelStore },
+        storeProducer = { ownerProducer().viewModelStore },
         factoryProducer = {
-            val coordinator = getCoordinatorHost()?.coordinator
-                ?: throw IllegalStateException("Could not find a CoordinatorHost")
             object : ViewModelProvider.Factory {
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return coordinator.createViewModel(modelClass)
+                    return coordinatorProducer().createViewModel(modelClass)
                 }
             }
         }
     )
 }
 
-fun Fragment?.getCoordinatorHost(): CoordinatorHost? {
+val Fragment.defaultCoordinatorProducer: () -> Coordinator
+    get() = {
+        getCoordinatorHost()?.coordinator
+            ?: throw IllegalStateException("Could not find a CoordinatorHost")
+    }
+
+private fun Fragment?.getCoordinatorHost(): CoordinatorHost? {
     if (this == null) return null
-    if (this is CoordinatorHost) return this
+    (activity as? CoordinatorHost)?.let { return it }
+    (this as? CoordinatorHost)?.let { return it }
     return parentFragment.getCoordinatorHost()
 }
