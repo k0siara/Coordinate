@@ -5,7 +5,7 @@ import com.patrykkosieradzki.coordinate.core.Coordinator
 import com.patrykkosieradzki.coordinate.sample.ui.TestCoordinator.Screen
 
 class TestCoordinator(
-    testNavigator: TestNavigator
+    private val testNavigator: TestNavigator
 ) : AbstractCoroutineCoordinator<Screen, Int>(navigator = testNavigator) {
 
     sealed class Screen {
@@ -14,7 +14,12 @@ class TestCoordinator(
     }
 
     override fun onEvent(event: Any) {
-        finishWith(123)
+        when (event) {
+            TestViewModel.CoordinatorEvent.EventA -> {
+                testNavigator.navigateTo(Screen.B)
+                finishWith(123)
+            }
+        }
     }
 }
 
